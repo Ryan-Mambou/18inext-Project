@@ -1,5 +1,8 @@
 {
     "Index": {
-      "title": "Bonjour le monde!"
+      "title": "Bonjour le monde!",
+      "select": "Choissisez une langue",
+      "language-one": "anglais",
+      "language-two": "francais"
     }
   }
