@@ -1,7 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import {useLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
 import {NextIntlClientProvider} from 'next-intl';
 
@@ -33,10 +32,8 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={inter.className}>
-      <NextIntlClientProvider locale={locale}>
-        {children}
-        </NextIntlClientProvider>
-        </body>
+        <NextIntlClientProvider locale={locale}>{children}</NextIntlClientProvider>
+      </body>
     </html>
   )
 }

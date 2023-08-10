@@ -1,21 +1,25 @@
 'use client'
+
 import {useTranslations} from 'next-intl'
-import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import {useRouter} from 'next-intl/client';
+
 
 export default function Home() { 
+
+  const router = useRouter();
 
   const handleSelect = (e : React.ChangeEvent<HTMLSelectElement>) => {
     const lang : string = e.target.value;
     if(lang === 'en'){
-      redirect('/en')
+      router.push('/', {locale:'en'})
     }
     else {
-      redirect('fr')
+      router.push('/', {locale:'fr'})
     }
   }
 
- const t = useTranslations('Index');
+  const t = useTranslations('Index');
+
  return <div className='w-full h-screen bg-orange-500 text-black 
  flex flex-col justify-center items-center'>
 <h1 className='text-8xl'>{t('title')}</h1>
