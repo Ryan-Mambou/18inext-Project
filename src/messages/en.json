@@ -1,4 +1,4 @@
-{
+  {
     "Index": {
       "title": "Hello world!",
       "select": "Select a language",
@@ -6,3 +6,4 @@
       "language-two": "french"
     }
   }
+
