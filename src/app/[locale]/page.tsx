@@ -25,15 +25,13 @@ export default function Home() {
 <h1 className='text-8xl'>{t('title')}</h1>
  <label htmlFor="language" className='text-2xl mt-2'>{t('select')}</label>
 <select name="language" id="language" defaultValue={locale}
- onChange={handleSelect} className='bg-black text-white w-32 rounded py-1 outline-none'>
+ onChange={handleSelect} className='bg-black text-white rounded py-1 px-2 outline-none'>
   {['en', 'fr'].map((cur) => (
           <option key={cur} value={cur}>
             {t('locale', {locale: cur})}
           </option>
         ))}
-  {/** <option value="english">{t("language-one")} en</option>
-  <option value="french">{t("language-two")} fr</option>  */}
-  
+
   </select>
  </div>;
 }
