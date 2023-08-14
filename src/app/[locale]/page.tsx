@@ -1,32 +1,39 @@
 'use client'
 
-import {useTranslations} from 'next-intl'
-import {useRouter} from 'next-intl/client';
+import {useTranslations, useLocale} from 'next-intl'
+import {useRouter, usePathname} from 'next-intl/client';
+import { useTransition } from 'react';
 
 
 export default function Home() { 
 
+  const t = useTranslations('Index');
   const router = useRouter();
+  const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
+  const locale = useLocale()
 
   const handleSelect = (e : React.ChangeEvent<HTMLSelectElement>) => {
-    const lang : string = e.target.value;
-    if(lang === 'en'){
-      router.push('/', {locale:'en'})
-    }
-    else {
-      router.push('/', {locale:'fr'})
-    }
+    const lang = e.target.value;
+    startTransition(() => {
+      router.replace(pathname, {locale: lang});
+    });
   }
-
-  const t = useTranslations('Index');
 
  return <div className='w-full h-screen bg-orange-500 text-black 
  flex flex-col justify-center items-center'>
 <h1 className='text-8xl'>{t('title')}</h1>
  <label htmlFor="language" className='text-2xl mt-2'>{t('select')}</label>
-<select name="language" id="language" onChange={handleSelect} className='bg-black text-white w-32 rounded py-1 outline-none'>
-  <option value="english">{t("language-one")}</option>
-  <option value="french">{t("language-two")}</option> 
+<select name="language" id="language" defaultValue={locale}
+ onChange={handleSelect} className='bg-black text-white w-32 rounded py-1 outline-none'>
+  {['en', 'fr'].map((cur) => (
+          <option key={cur} value={cur}>
+            {t('locale', {locale: cur})}
+          </option>
+        ))}
+  {/** <option value="english">{t("language-one")} en</option>
+  <option value="french">{t("language-two")} fr</option>  */}
+  
   </select>
  </div>;
 }
